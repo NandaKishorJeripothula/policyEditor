@@ -1,4 +1,4 @@
-import React ,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -120,9 +120,12 @@ export default function Dashboard() {
   const [policies, setPolicies] = useState({
     columns: [
       { title: "Role", field: "role" },
-      { title: "Data1", field: "data1", type: "boolean" }
+      { title: "User Creation", field: "user_create", type: "boolean" },
+      { title: "User Deletion", field: "user_delete", type: "boolean" },
+      { title: "User Updating", field: "user_update", type: "boolean" },
+      { title: "Branch Creation", field: "branch_create", type: "boolean" }
     ],
-        data: [{ role: "admin", data1: "true" }]
+    data: [{ role: "admin", user_create: "true" }]
   });
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -133,11 +136,11 @@ export default function Dashboard() {
     setOpen(false);
   };
   useEffect(() => {
-    console.log(policies)
+    console.log(policies);
     return () => {
       //post the data to the server
     };
-  }, [policies])
+  }, [policies]);
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <div className={classes.root}>
@@ -216,8 +219,7 @@ export default function Dashboard() {
             </Grid> */}
             {/* Policy Management*/}
             <Grid item xs={12}>
-     
-              <PolicyManagement policies={policies} setPolicies={setPolicies}/>
+              <PolicyManagement policies={policies} setPolicies={setPolicies} />
             </Grid>
           </Grid>
         </Container>

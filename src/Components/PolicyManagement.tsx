@@ -38,10 +38,7 @@ export default function PolicyManagement(props) {
         ThirdStateCheck: Remove
       }}
       title="Policies"
-      columns={[
-        { title: "Role", field: "role", lookup:{admin:'admin', user:'user', ins:'instructor',other:'other' } },
-        { title: "Data1", field: "data1", type: "boolean" }
-      ]}
+      columns={policies.columns}
       data={policies.data}
       editable={{
         onRowAdd: newData =>
@@ -49,6 +46,7 @@ export default function PolicyManagement(props) {
             setTimeout(() => {
               resolve();
               const data = [...policies.data];
+              console.log(newData);
               data.push(newData);
               setPolicies({ ...policies, data });
             }, 600);
@@ -58,6 +56,7 @@ export default function PolicyManagement(props) {
             setTimeout(() => {
               resolve();
               const data = [...policies.data];
+              console.log(newData);
               data[data.indexOf(oldData)] = newData;
               setPolicies({ ...policies, data });
             }, 600)
