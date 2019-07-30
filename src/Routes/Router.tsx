@@ -10,6 +10,7 @@ import Appolo from "../Components/Appolo";
 import Appoloboost from "../Components/Appoloboost";
 import Signup from "../Components/Signup";
 import Signin from "../Components/Signin";
+import Dashboard from "../Components/Dashboard";
 
 const routes = {
   "/": () => <Interactions />,
@@ -23,6 +24,7 @@ const routes = {
   "/appolo-boost": () => <Appoloboost />,
   "/signup": () => <Signup />,
   "/login": () => <Signin />,
+  "/dashboard":()=><Dashboard/>
 };
 
 export default routes;
