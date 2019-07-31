@@ -22,7 +22,7 @@ import Chart from "./dashboard/Chart";
 import Deposits from "./dashboard/Deposits";
 import Orders from "./dashboard/Order";
 import PolicyManagement from "./PolicyManagement";
-
+import Test from './Test';
 function BottomMessage() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -219,7 +219,8 @@ export default function Dashboard() {
             </Grid> */}
             {/* Policy Management*/}
             <Grid item xs={12}>
-              <PolicyManagement policies={policies} setPolicies={setPolicies} />
+              {/* <PolicyManagement policies={policies} setPolicies={setPolicies} /> */}
+              <Test/>
             </Grid>
           </Grid>
         </Container>

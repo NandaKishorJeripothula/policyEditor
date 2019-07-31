@@ -79,3 +79,10 @@ PolicyManagement.propTypes = {
   setPolicies:PropTypes.func.isRequired
   // structure:PropTypes.object.isRequired
 };
+
+
+/**
+ * Call Tabs with the parent data and then generate the tabs based on the user input
+ */
+
+ 
