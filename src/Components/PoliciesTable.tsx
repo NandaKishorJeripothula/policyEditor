@@ -28,7 +28,7 @@ interface Policy {
 }
 
 export default function PoliciesTable(props) {
-  const { policiesTable, policies, setPolicies, role } = props;
+  const { policiesTable, policies, setPolicies, role, getRules } = props;
   const getIndex = (objKey: String, objArray: [Policy]): number => {
     return objArray.findIndex(obj => obj.licence === objKey);
   };
@@ -74,71 +74,24 @@ export default function PoliciesTable(props) {
       }
     }
     setPolicies(data);
-    // if (i != -1) {
-    //   data[role].push({ licence: [objKey], select: [event.target.checked] });
-    //   setPolicies(data);
-    // }else{
-    //     data[role][i]=({licence: [objKey], select: "true"});
-    //     setPolicies(data);
-    // }
   };
 
   return (
     <div>
       <div>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={isChecked("reports", policies[role].getRules)}
-              onChange={handleCheckBoxChange("reports", policies[role].getRules)}
-              value="reports"
+        {getRules &&
+          getRules.map(i => (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isChecked(i, policies[role].getRules)}
+                  onChange={handleCheckBoxChange(i, policies[role].getRules)}
+                  value={i}
+                />
+              }
+              label={inflection.humanize(i)}
             />
-          }
-          label="Reports"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={isChecked("interactions", policies[role].getRules)}
-              onChange={handleCheckBoxChange(
-                "interactions",
-                policies[role].getRules
-              )}
-              value="interactions"
-            />
-          }
-          label="Interactions"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={isChecked("loginDetails", policies[role].getRules)}
-              onChange={handleCheckBoxChange(
-                "loginDetails",
-                policies[role].getRules
-              )}
-              value="loginDetails"
-            />
-          }
-          label="LoginDetails"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={isChecked(
-                "timeZoneCountrySpecific",
-                policies[role].getRules
-              )}
-              onChange={handleCheckBoxChange(
-                "timeZoneCountrySpecific",
-                policies[role].getRules
-              )}
-              value="timeZoneCountrySpecific"
-            />
-          }
-          label="TimeZones Country Specific
-      "
-        />
+          ))}
       </div>
       <CssBaseline />
       <MaterialTable
@@ -211,7 +164,8 @@ PoliciesTable.propTypes = {
   policies: PropTypes.object.isRequired,
   role: PropTypes.string.isRequired,
   policiesTable: PropTypes.array.isRequired,
-  setPolicies: PropTypes.func.isRequired
+  setPolicies: PropTypes.func.isRequired,
+  getRules: PropTypes.array.isRequired
 };
 
 // const policiesTable=[

@@ -66,6 +66,7 @@ export default function Test() {
     <PoliciesTable
       role="admin"
       policies={policies}
+      getRules={['reports','interactions','timeZoneCountrySpecific','loginDetails']}
       setPolicies={setPolicies}
       policiesTable={policiesTable}
     />
