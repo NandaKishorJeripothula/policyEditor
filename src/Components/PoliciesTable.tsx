@@ -34,7 +34,7 @@ export default function PoliciesTable(props) {
   };
   const isChecked = (objKey: String, objArray: [Policy]): boolean => {
     let i = getIndex(objKey, objArray);
-    if (i != -1) return objArray[i].select;
+    if (i !== -1) return objArray[i].select;
     else return false;
   };
   const handleCheckBoxChange = (objKey: String, objArray: [Policy]) => (
@@ -48,7 +48,7 @@ export default function PoliciesTable(props) {
        * if rule exist OVERRIDE
        * else add
        */
-      if (i != -1) {
+      if (i !== -1) {
         //EXIST->OVERRIDE
         data[role].getRules[i] = {
           licence: objKey,
@@ -66,7 +66,7 @@ export default function PoliciesTable(props) {
        * if rule exist REMOVE
        * else skip
        */
-      if (i != -1) {
+      if (i !== -1) {
         //Exist->REMOVE
         data[role].getRules.splice(i, 1);
       } else {
@@ -78,21 +78,7 @@ export default function PoliciesTable(props) {
 
   return (
     <div>
-      <div>
-        {getRules &&
-          getRules.map(i => (
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={isChecked(i, policies[role].getRules)}
-                  onChange={handleCheckBoxChange(i, policies[role].getRules)}
-                  value={i}
-                />
-              }
-              label={inflection.humanize(i)}
-            />
-          ))}
-      </div>
+    
       <CssBaseline />
       <MaterialTable
         icons={{
@@ -156,6 +142,21 @@ export default function PoliciesTable(props) {
             )
         }}
       />
+        <div>
+        {getRules &&
+          getRules.map(i => (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isChecked(i, policies[role].getRules)}
+                  onChange={handleCheckBoxChange(i, policies[role].getRules)}
+                  value={i}
+                />
+              }
+              label={inflection.humanize(i)}
+            />
+          ))}
+      </div>
     </div>
   );
 }
