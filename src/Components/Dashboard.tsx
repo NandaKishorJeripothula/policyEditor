@@ -117,16 +117,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Dashboard() {
-  const [policies, setPolicies] = useState({
-    columns: [
-      { title: "Role", field: "role" },
-      { title: "User Creation", field: "user_create", type: "boolean" },
-      { title: "User Deletion", field: "user_delete", type: "boolean" },
-      { title: "User Updating", field: "user_update", type: "boolean" },
-      { title: "Branch Creation", field: "branch_create", type: "boolean" }
-    ],
-    data: [{ role: "admin", user_create: "true" }]
-  });
+  // const [policies, setPolicies] = useState({
+  //   columns: [
+  //     { title: "Role", field: "role" },
+  //     { title: "User Creation", field: "user_create", type: "boolean" },
+  //     { title: "User Deletion", field: "user_delete", type: "boolean" },
+  //     { title: "User Updating", field: "user_update", type: "boolean" },
+  //     { title: "Branch Creation", field: "branch_create", type: "boolean" }
+  //   ],
+  //   data: [{ role: "admin", user_create: "true" }]
+  // });
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -135,12 +135,6 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  useEffect(() => {
-    console.log(policies);
-    return () => {
-      //post the data to the server
-    };
-  }, [policies]);
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <div className={classes.root}>

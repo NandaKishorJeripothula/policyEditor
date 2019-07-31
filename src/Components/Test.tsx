@@ -19,29 +19,55 @@ export default function Test() {
         messages: "Messages",
         skills: "Skills",
         skillCategories: "Skill Categories",
-        reports: "Reports",
-        interactions: "Interactions",
-        timeZoneCountrySpecific: "TimeZones Country Specific",
-        loginDetails: "Me/Login Details"
+        // reports: "Reports",
+        // interactions: "Interactions",
+        // timeZoneCountrySpecific: "TimeZones Country Specific",
+        // loginDetails: "Me/Login Details"
       }
     },
-    { title: "Get", field: "select", type: "boolean", emptyValue: ()=>false },
-    { title: "Create", field: "insert", type: "boolean", emptyValue: ()=>false },
-    { title: "Edit", field: "update", type: "boolean", emptyValue: ()=>false },
-    { title: "Delete", field: "delete", type: "boolean", emptyValue: ()=>false }
+    { title: "Get", field: "select", type: "boolean", emptyValue: () => false },
+    {
+      title: "Create",
+      field: "insert",
+      type: "boolean",
+      emptyValue: () => false
+    },
+    {
+      title: "Edit",
+      field: "update",
+      type: "boolean",
+      emptyValue: () => false
+    },
+    {
+      title: "Delete",
+      field: "delete",
+      type: "boolean",
+      emptyValue: () => false
+    }
   ];
   const [policies, setPolicies] = useState({
     //select: "false",insert:"false", update:"false", delete:"false",
-    roles: {
-      admin: [
-        // {
-        //   licence: "Pick..."
-        // }
-      ],
-      user: [
-        
-      ]
+    admin: {
+      getRules: [],
+      allRules: []
+    },
+    user: {
+      getRules: [],
+      allRules: []
     }
   });
-  return <PoliciesTable role="admin" policies={policies} setPolicies={setPolicies} policiesTable={policiesTable}/>;
+  useEffect(() => {
+    console.log(policies);
+    return () => {
+      //post the data to the server
+    };
+  }, [policies]);
+  return (
+    <PoliciesTable
+      role="admin"
+      policies={policies}
+      setPolicies={setPolicies}
+      policiesTable={policiesTable}
+    />
+  );
 }

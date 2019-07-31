@@ -50,12 +50,12 @@ export default function PoliciesTable(props) {
        */
       if (i != -1) {
         //EXIST->OVERRIDE
-        data.roles[role][i] = {
+        data[role].getRules[i] = {
           licence: objKey,
           select: event.target.checked
         };
       } else {
-        data.roles[role].push({
+        data[role].getRules.push({
           licence: objKey,
           select: event.target.checked
         });
@@ -68,17 +68,17 @@ export default function PoliciesTable(props) {
        */
       if (i != -1) {
         //Exist->REMOVE
-        data.roles[role].splice(i, 1);
+        data[role].getRules.splice(i, 1);
       } else {
         //SKIP
       }
     }
     setPolicies(data);
     // if (i != -1) {
-    //   data.roles[role].push({ licence: [objKey], select: [event.target.checked] });
+    //   data[role].push({ licence: [objKey], select: [event.target.checked] });
     //   setPolicies(data);
     // }else{
-    //     data.roles[role][i]=({licence: [objKey], select: "true"});
+    //     data[role][i]=({licence: [objKey], select: "true"});
     //     setPolicies(data);
     // }
   };
@@ -89,8 +89,8 @@ export default function PoliciesTable(props) {
         <FormControlLabel
           control={
             <Checkbox
-              checked={isChecked("reports", policies.roles[role])}
-              onChange={handleCheckBoxChange("reports", policies.roles[role])}
+              checked={isChecked("reports", policies[role].getRules)}
+              onChange={handleCheckBoxChange("reports", policies[role].getRules)}
               value="reports"
             />
           }
@@ -99,10 +99,10 @@ export default function PoliciesTable(props) {
         <FormControlLabel
           control={
             <Checkbox
-              checked={isChecked("interactions", policies.roles[role])}
+              checked={isChecked("interactions", policies[role].getRules)}
               onChange={handleCheckBoxChange(
                 "interactions",
-                policies.roles[role]
+                policies[role].getRules
               )}
               value="interactions"
             />
@@ -112,10 +112,10 @@ export default function PoliciesTable(props) {
         <FormControlLabel
           control={
             <Checkbox
-              checked={isChecked("loginDetails", policies.roles[role])}
+              checked={isChecked("loginDetails", policies[role].getRules)}
               onChange={handleCheckBoxChange(
                 "loginDetails",
-                policies.roles[role]
+                policies[role].getRules
               )}
               value="loginDetails"
             />
@@ -127,11 +127,11 @@ export default function PoliciesTable(props) {
             <Checkbox
               checked={isChecked(
                 "timeZoneCountrySpecific",
-                policies.roles[role]
+                policies[role].getRules
               )}
               onChange={handleCheckBoxChange(
                 "timeZoneCountrySpecific",
-                policies.roles[role]
+                policies[role].getRules
               )}
               value="timeZoneCountrySpecific"
             />
@@ -168,14 +168,14 @@ export default function PoliciesTable(props) {
         }}
         title={`Policies for ${inflection.humanize(role)}`}
         columns={policiesTable}
-        data={policies.roles[role]}
+        data={policies[role].allRules}
         editable={{
           onRowAdd: newData =>
             new Promise(resolve => {
               setTimeout(() => {
                 resolve();
                 const data = { ...policies };
-                data.roles[role].push(newData);
+                data[role].allRules.push(newData);
                 console.log(data);
                 setPolicies(data);
               }, 600);
@@ -189,7 +189,7 @@ export default function PoliciesTable(props) {
                 console.log(newData);
                 const { tableData, ...policy } = newData;
                 console.log(policy);
-                data.roles[role][data.roles[role].indexOf(oldData)] = policy;
+                data[role][data[role].allRules.indexOf(oldData)] = policy;
                 setPolicies(data);
               }, 600)
             ),
@@ -197,7 +197,7 @@ export default function PoliciesTable(props) {
             new Promise(resolve =>
               setTimeout(() => {
                 const data = { ...policies };
-                data.roles[role].splice(data.roles[role].indexOf(oldData), 1);
+                data[role].splice(data[role].allRules.indexOf(oldData), 1);
                 setPolicies(data);
               }, 600)
             )
@@ -245,11 +245,7 @@ PoliciesTable.propTypes = {
 // const [policies, setPolicies] = useState({
 //   //select: "false",insert:"false", update:"false", delete:"false",
 //   roles: {
-//     admin: [
-//       {
-//         licence: "Pick..."
-//       }
-//     ],
+//     admin: { getRules:[],  allRules:[]},
 //     user:[ {
 //         licence: "Pick..."
 //       }]
